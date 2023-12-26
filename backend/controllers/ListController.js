@@ -22,6 +22,11 @@ module.exports = class UserController {
       theme
     });
 
+    if (!theme || theme.length < 1) {
+      res.status(422).json({ message: "É necessário no minimo 1 item na lista" });
+      return;
+    }
+
     try {
       await list.save();
       res.status(200).json({ data: list });
